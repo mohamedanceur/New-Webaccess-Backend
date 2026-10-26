@@ -1,0 +1,21 @@
+# Conversion to YAML from Properties formar report
+# Warnings:
+# - The yaml file had comments which are lost in the refactoring!
+spring:
+  application:
+    name: Webaccess
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=monecheck;encrypt=true;trustServerCertificate=true
+    username: monecheck
+    password: monecheck
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    open-in-view: false
+app:
+  datasource:
+    numerise:
+      jdbc-url: jdbc:sqlserver://localhost:1433;databaseName=NumeriseAGB;encrypt=true;trustServerCertificate=true
+      username: monecheck
+      password: monecheck
