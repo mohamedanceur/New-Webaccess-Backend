@@ -4,6 +4,8 @@ package com.Atos.Webaccess.Domain.Banque;
 
 import com.Atos.Webaccess.Domain.Agence.Agence;
 import com.Atos.Webaccess.User.Entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,8 +39,8 @@ public class Banque implements Serializable {
     @Column(name = "LIBELLEBANQUE")
     private String libelle;
 
-    @Column(name = "CODEBIN")
-    private Integer codeBin;
+    @Column(name = "CODEBIN", columnDefinition = "char(6)")
+    private String codeBin;
 
     @Column(name = "ALGORITHMEDECONTROLESPECIFIQUE")
     private Integer algo;
@@ -56,9 +58,11 @@ public class Banque implements Serializable {
      * Inverse relationships: the foreign keys remain on USER
      * and AGENCES. These collections do not create join tables.
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "bank", fetch = FetchType.LAZY)
     private Set<User> usersBanque = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "bankAgence", fetch = FetchType.LAZY)
     private Set<Agence> agencesBanque = new HashSet<>();
 }

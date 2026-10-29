@@ -40,7 +40,7 @@ public class Tache implements Serializable {
     @Column(name = "IDTACHE")
     private Integer id;
 
-    @Column(name = "TYPETACHE")
+    @Column(name = "TYPETACHE", columnDefinition = "char(1)")
     private String type;
 
     @Column(name = "TYPEINSTRUMENT")
@@ -97,10 +97,14 @@ public class Tache implements Serializable {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "UTILISATEURS_TACHES",
-        joinColumns = @JoinColumn(name = "IDTACHE"),
+        joinColumns = @JoinColumn(
+            name = "IDTACHE",
+            columnDefinition = "int"
+        ),
         inverseJoinColumns = @JoinColumn(
             name = "IDUTILISATEUR",
-            referencedColumnName = "id"
+            referencedColumnName = "id",
+            columnDefinition = "int"
         )
     )
     private Set<User> usersTache = new HashSet<>();

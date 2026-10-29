@@ -38,6 +38,7 @@ import com.atos.tesseract.main.OcrReader;*/
 
 @Service
 public class EffetBNAServiceImpl implements EffetBNAService {
+	/*
 	@Autowired
 	@Qualifier("sibJdbcTemplate")
 	JdbcTemplate sibJdbcTemplate;
@@ -46,7 +47,7 @@ public class EffetBNAServiceImpl implements EffetBNAService {
 	@Qualifier("mainJdbcTemplate")
 	JdbcTemplate mainJdbcTemplate;*/
 	
-	
+	/*
 	public class BkfrRowMapper implements RowMapper<EffetBNA> {
 		@Override
 		public EffetBNA mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -71,7 +72,7 @@ public class EffetBNAServiceImpl implements EffetBNAService {
 
 
 	
-
+*/
 
 
 }

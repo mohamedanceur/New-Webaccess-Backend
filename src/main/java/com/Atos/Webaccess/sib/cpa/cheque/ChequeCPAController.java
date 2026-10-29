@@ -11,7 +11,7 @@ import com.Atos.Webaccess.sib.cpa.compte.CompteCPAService;
 @RestController
 @RequestMapping("/sib/cpa/cheque")
 public class ChequeCPAController {
-
+/*
 	@Autowired
 	ChequeCPAService chequeCPAService;
 
@@ -24,5 +24,5 @@ public class ChequeCPAController {
 				chequeCpa.getBanque(), chequeCpa.getNumeroCheque());
 
 	}
-
+*/
 }

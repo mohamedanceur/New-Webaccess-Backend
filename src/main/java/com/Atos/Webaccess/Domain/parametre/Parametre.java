@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 
 
 @Entity
-@Table(name = "Parametre")
+@Table(name = "parametre", schema = "dbo")
 public class Parametre implements Serializable{
 
 	
@@ -18,10 +18,7 @@ public class Parametre implements Serializable{
 	
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,  generator ="parametre_generator")
-	@SequenceGenerator(name="parametre_generator", sequenceName="parametre_seq",allocationSize=1)
-
-	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "IDENTIFIANTPARAMETRE")
 	private Long identifiantParametre;
 	

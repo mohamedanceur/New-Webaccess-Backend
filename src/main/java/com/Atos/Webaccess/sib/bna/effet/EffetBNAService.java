@@ -10,7 +10,7 @@ import com.atos.security.domain.effets.Effet;*/
 
 public interface EffetBNAService {
 
-	public List<EffetBNA> list_rech_op_bkfr(String where_clause);
+	//public List<EffetBNA> list_rech_op_bkfr(String where_clause);
 
 
 }

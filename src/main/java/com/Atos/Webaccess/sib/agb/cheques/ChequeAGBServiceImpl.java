@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 public class ChequeAGBServiceImpl implements ChequeAGBService {
 
 
-	
-	@Autowired
+	/*
+	 @Autowired
 	@Qualifier("sibJdbcTemplate")
-	JdbcTemplate sibJdbcTemplate;
+	JdbcTemplate sibJdbcTemplate; 
 	
 	@Override
 	public ChequeAGB getChequeAgb(String numeroCompte, String numeroCheque)
@@ -68,5 +68,5 @@ public class ChequeAGBServiceImpl implements ChequeAGBService {
 	        return cheque;
 	    }
 	}
-	
+	*/
 }

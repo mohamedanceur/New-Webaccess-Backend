@@ -16,8 +16,8 @@ public class ChequeAGBController {
 	@PostMapping("/getCheque")
 	public ChequeAGB getCompte(@RequestBody ChequeAGB cheque)
 	{
-		return chequeAGBService.getChequeAgb(cheque.getNumeroCompte(), cheque.getNumeroCheque());
-		
+		//return chequeAGBService.getChequeAgb(cheque.getNumeroCompte(), cheque.getNumeroCheque());
+		return null;
 	}
 
 }

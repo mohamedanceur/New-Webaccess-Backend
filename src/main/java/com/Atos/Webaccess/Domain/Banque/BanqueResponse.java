@@ -6,7 +6,7 @@ public record BanqueResponse(
     String code,
     Integer idPays,
     String libelle,
-    Integer codeBin,
+    String codeBin,
     Integer algo,
     Integer banqueMere,
     Integer statut,

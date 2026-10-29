@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CompteAGBServiceImpl implements CompteAGBService {
 
-
+/*
 	
 	@Autowired
 	@Qualifier("sibJdbcTemplate")
@@ -68,5 +68,5 @@ public class CompteAGBServiceImpl implements CompteAGBService {
 	        return compte;
 	    }
 	}
-	
+	*/
 }

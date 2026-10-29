@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ChequeCPAServiceImpl implements ChequeCPAService {
-	
+	/*
 	@Autowired
 	@Qualifier("sibJdbcTemplate")
 	JdbcTemplate sibJdbcTemplate;
@@ -60,5 +60,5 @@ public class ChequeCPAServiceImpl implements ChequeCPAService {
 			return chequeCPA;
 		}
 	}
-
+*/
 }

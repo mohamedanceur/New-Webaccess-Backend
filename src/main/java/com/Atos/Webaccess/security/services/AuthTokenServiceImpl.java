@@ -37,12 +37,15 @@ public class AuthTokenServiceImpl implements AuthTokenService{
 
 	@Override
 	public boolean isTokenExpired(AuthToken token) {
-		
-		final LocalDateTime now = LocalDateTime.now();
-		final LocalDateTime lastAccessTime = token.getLastAccesTime();
-		
-		return Math.abs(ChronoUnit.MINUTES.between(now, lastAccessTime)) < AppConstants.MAX_ALLOWED_INACTIVE_SESSION_MIN;
-		
+
+	    if (token == null || token.getLastAccesTime() == null) {
+	        return true;
+	    }
+
+	    LocalDateTime expirationTime = token.getLastAccesTime()
+	        .plusMinutes(AppConstants.MAX_ALLOWED_INACTIVE_SESSION_MIN);
+
+	    return !LocalDateTime.now().isBefore(expirationTime);
 	}
 
 	@Override

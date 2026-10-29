@@ -17,7 +17,7 @@ public record BanqueRequest(
     @Size(max = 255)
     String libelle,
 
-    Integer codeBin,
+    String codeBin,
     Integer algo,
     Integer banqueMere
 ) {}

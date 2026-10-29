@@ -15,7 +15,12 @@ import java.util.List;
 @Setter
 public class Role implements GrantedAuthority {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3983363764054651210L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, unique = true, updatable = false)
     private Long id;
@@ -26,7 +31,7 @@ public class Role implements GrantedAuthority {
     
     
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
         name = "roles_rights",
         joinColumns = @JoinColumn(

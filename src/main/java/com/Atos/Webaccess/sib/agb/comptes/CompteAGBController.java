@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/sib/agb")
 public class CompteAGBController {
-	
+	/*
 	@Autowired
 	CompteAGBService compteAGBService;
 	
@@ -19,5 +19,5 @@ public class CompteAGBController {
 		return compteAGBService.getCompteAgb(compte.getNumeroCompte());
 		
 	}
-
+*/
 }

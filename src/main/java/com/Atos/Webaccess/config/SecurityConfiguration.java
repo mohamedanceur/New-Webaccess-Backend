@@ -19,6 +19,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -83,9 +84,7 @@ public class SecurityConfiguration {
 
         TokenAuthenticationFilter tokenAuthenticationFilter =
                 new TokenAuthenticationFilter(
-                    authTokenService,
-                    userService,
-                    passwordEncoder
+                    authTokenService
                 );
 
         http.addFilter(basicTokenAuthenticationFilter);
@@ -104,11 +103,13 @@ public class SecurityConfiguration {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
+                    .allowedOrigins("http://localhost:8080")
                     .allowedMethods(
-                        "HEAD", "GET", "PUT", "POST", "DELETE", "PATCH"
+                        "HEAD", "GET", "PUT", "POST",
+                        "DELETE", "PATCH", "OPTIONS"
                     )
-                    .allowCredentials(true)
-                    .allowedHeaders("*");
+                    .allowedHeaders("*")
+                    .allowCredentials(true);
             }
         };
     }

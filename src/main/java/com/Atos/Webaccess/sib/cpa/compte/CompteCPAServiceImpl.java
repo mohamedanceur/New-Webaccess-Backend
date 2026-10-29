@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CompteCPAServiceImpl implements CompteCPAService {
-
+/*
 	@Autowired
 	@Qualifier("sibJdbcTemplate")
 	JdbcTemplate sibJdbcTemplate;
@@ -77,6 +77,6 @@ public class CompteCPAServiceImpl implements CompteCPAService {
 		}
 	}
 
-	
+	*/
 
 }

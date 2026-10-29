@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 		admin.setUsername("admin");
 		admin.setDefaultipadress("169.254.243.141");
 		admin.setIdGroupe(1);
-		admin.setIdBanque(1);
+		admin.setIdBanque((long)1);
 		admin.setDefault_Code_Agence(cmn.readProp(DOMAIN_CODE_AGENCE_PILOTE));
 		admin.setEmail("admin@atos.net");
 		admin.setMobile("0556565656");
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
 		user.setUsername("user");
 		user.setDefaultipadress("169.254.243.166");
 		user.setIdGroupe(1);
-		user.setIdBanque(1);
+		user.setIdBanque((long)1);
 		user.setEmail("user@atos.net");
 		user.setMobile("0550505050");
 		user.setDefault_Code_Agence(cmn.readProp(DOMAIN_CODE_AGENCE_PILOTE));

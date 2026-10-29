@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "PARAMETRES")
+@Table(name = "PARAMETRES", schema = "dbo")
 @Getter
 @Setter
 @NoArgsConstructor

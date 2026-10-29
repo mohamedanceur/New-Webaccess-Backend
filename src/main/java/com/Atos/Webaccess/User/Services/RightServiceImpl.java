@@ -12,6 +12,7 @@ import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,34 +25,13 @@ public class RightServiceImpl implements RightService {
 	
 	private final RightRepository rightRepository;
 	
-	//@Autowired
-	//@Qualifier("mainJdbcTemplate")
-	//JdbcTemplate mainJdbcTemplate;
+	@Value("${domain.codeBanque}")
 	private String codeBanque;
-	
-	
-	@Autowired
-	public RightServiceImpl(RightRepository rightRepository  ) {
-		
-		this.rightRepository = rightRepository;
-		try {
-			Properties prop = new Properties();
-			InputStream input = new FileInputStream("./config/application.properties");
-			prop.load(input);
-			input.close();
-			// prop.load(FTPProperties.class.getResourceAsStream("/application.properties"));
-			this.codeBanque = prop.getProperty("domain.codeBanque");
-			
 
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		//this.codeBanque = "004";
-		//this.initialize(); dertha commentaire le 15/10 just to fix an issue when i start the app and i should clean the comment when all start goood
-		
-	}
+    @Autowired
+    public RightServiceImpl(RightRepository rightRepository) {
+        this.rightRepository = rightRepository;
+    }
 
 
 

@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.Atos.Webaccess.sib.agb.comptes.CompteAGB;
-import com.Atos.Webaccess.sib.agb.comptes.CompteAGBServiceImpl.CompteAgbRowMapper;
+//import com.Atos.Webaccess.sib.agb.comptes.CompteAGBServiceImpl.CompteAgbRowMapper;
 
 @Service
 public class CompteHSBCServiceImpl implements CompteHSBCService {

@@ -2,7 +2,6 @@ package com.Atos.Webaccess.security.filters;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,27 +16,18 @@ import static com.Atos.Webaccess.Constants.AppConstants.*;
 import com.Atos.Webaccess.Commun.Commun;
 import com.Atos.Webaccess.Domain.parametre.Parametre;
 import com.Atos.Webaccess.Domain.parametre.ParametreService;
-import com.Atos.Webaccess.security.entities.AuthToken;
 import com.Atos.Webaccess.security.services.AuthTokenService;
 import com.Atos.Webaccess.User.Entities.Hpassword;
 import com.Atos.Webaccess.User.Entities.*;
-import com.Atos.Webaccess.User.Services.*;
-
 import com.Atos.Webaccess.User.Services.HpasswordService;
 import com.Atos.Webaccess.User.Services.UserService;
 
-import tools.jackson.databind.ObjectMapper;
-import java.util.Base64;
-import java.nio.charset.StandardCharsets;
+
 
 
 public class BasicTokenAuthenticationFilter extends BasicAuthenticationFilter{
 
 
-	private final AuthTokenService authTokenService;
-	private final UserService userService;
-	private ObjectMapper objectMapper = new ObjectMapper();
-	private  final BCryptPasswordEncoder passwordEncoder;
 	private final ParametreService parametreService;
 	private final HpasswordService hpasswordService;
 	
@@ -45,9 +35,6 @@ public class BasicTokenAuthenticationFilter extends BasicAuthenticationFilter{
 			AuthTokenService authTokenService ,UserService userService ,
 			BCryptPasswordEncoder passwordEncoder,ParametreService parametreService,HpasswordService hpasswordService) {
 		super(authenticationManager);
-		this.authTokenService = authTokenService;
-		this.userService = userService;
-		this.passwordEncoder= passwordEncoder;
 		this.parametreService= parametreService;
 		this.hpasswordService=hpasswordService;
 	}
@@ -62,17 +49,7 @@ public class BasicTokenAuthenticationFilter extends BasicAuthenticationFilter{
 			User user = (User) authentication.getPrincipal();
 			request.getSession().setAttribute(USER_KEY, user);
 			request.getSession().setAttribute(USER_ID, user.getId());
-			//this.authTokenService.findByUser(user).forEach(authTokenService::delete);
-			//AuthToken authToken = authTokenService.create(user);
-			String authTokenID;
 			
-			try {
-				authTokenID = this.authTokenService.findByUser(user).get(0).getId();
-			} catch (Exception e1) {
-				AuthToken authToken = authTokenService.create(user);
-				authTokenID = authToken.getId();
-			}
-			request.getSession().setAttribute(AUTH_TOKEN_NAME, authTokenID);
 			
 			if (user.getFirst_login() == 0) {
 				request.getSession().setAttribute(FIRST_LOGIN, true);
@@ -116,7 +93,7 @@ public class BasicTokenAuthenticationFilter extends BasicAuthenticationFilter{
 										h.setStatut(1);
 										h.setDatesaisie(new Date());
 										h.setMotdepasse(user.getPassword());
-										h.setIdutilisateur(user.getId());
+										h.setIdutilisateur((int)user.getId());
 										hpasswordService.saveHpassword(h);
 										
 									} catch (Exception e) {

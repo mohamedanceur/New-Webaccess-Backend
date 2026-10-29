@@ -4,12 +4,12 @@ import java.util.*;
 import jakarta.persistence.*;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.Atos.Webaccess.Domain.Banque.Banque;
 import com.Atos.Webaccess.Domain.Tache.Tache;
 
 import java.util.ArrayList;
@@ -24,7 +24,12 @@ import java.util.List;
 @Setter
 public class User implements UserDetails {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6534988701913511042L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
     @SequenceGenerator(
         name = "user_generator",
@@ -43,8 +48,18 @@ public class User implements UserDetails {
     @Column(name = "DEFAULTIPADRESS")
     private String defaultipadress;
 
+ // Existing database column; remains the writable field.
     @Column(name = "IDBANQUE")
-    private long idBanque;
+    private Long idBanque;
+
+    // JPA association using the same column, read-only.
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(
+        name = "IDBANQUE",
+        insertable = false,
+        updatable = false
+    )
+    private Banque bank;
 
     @Column(name = "IDGROUPE")
     private long idGroupe;
@@ -86,12 +101,7 @@ public class User implements UserDetails {
     )
     private List<GrantedAuthority> authorites = new ArrayList<>();
     
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "UTILISATEURS_TACHES",
-        joinColumns = @JoinColumn(name = "IDUTILISATEUR"),
-        inverseJoinColumns = @JoinColumn(name = "IDTACHE")
-    )
+    @ManyToMany(mappedBy = "usersTache", fetch = FetchType.EAGER)
     private Set<Tache> taches_user = new HashSet<>();
 
     @Override

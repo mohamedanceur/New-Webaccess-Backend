@@ -99,7 +99,7 @@ public class AgenceServiceImpl implements AgenceService {
 
     @Override
     public List<AgenceResponse> findByBank(Integer idBanque) {
-        return agenceRepository.findById_banqueOrderByCodeAsc(idBanque)
+        return agenceRepository.findAgencesByBanqueId(idBanque)
                 .stream()
                 .map(this::toResponse)
                 .toList();
@@ -108,7 +108,7 @@ public class AgenceServiceImpl implements AgenceService {
     @Override
     public List<AgenceResponse> findByGroup(Integer idGroupe) {
         return agenceRepository
-                .findDistinctByGrps_agence_IdOrderByCodeAsc(idGroupe)
+                .findAgencesByGroupeId(idGroupe)
                 .stream()
                 .map(this::toResponse)
                 .toList();

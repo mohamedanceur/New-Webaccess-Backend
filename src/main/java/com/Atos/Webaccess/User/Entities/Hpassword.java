@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.Date;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
-@Table(name="Hpassword")
-public class Hpassword  implements Serializable{
+@Table(name = "HPASSWORD", schema = "dbo")
+public class Hpassword implements Serializable {
 
 	/**
 	 * 
@@ -17,14 +20,12 @@ public class Hpassword  implements Serializable{
 
 
 	@Id
-	/*@GeneratedValue(strategy=GenerationType.SEQUENCE,  generator ="hpassword_generator")
-	@SequenceGenerator(name="hpassword_generator", sequenceName="hpassword_seq",allocationSize=1)*/
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name = "IDPWD" , nullable = false , unique = true , updatable = false)
-	private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "IDPWD", nullable = false, unique = true, updatable = false)
+	private Integer id;
 	
-	@Column(name = "idutilisateur" , nullable = false , unique = false )
-	private long idutilisateur;
+	@Column(name = "idutilisateur", nullable = false)
+	private Integer idutilisateur;
 	
 	
 	@Column(name = "motdepasse" , nullable = true , unique = false )
@@ -36,45 +37,6 @@ public class Hpassword  implements Serializable{
 	@Column(name = "datesaisie" , nullable = true , unique = false )
 	private Date datesaisie;
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getMotdepasse() {
-		return motdepasse;
-	}
-
-	public void setMotdepasse(String motdepasse) {
-		this.motdepasse = motdepasse;
-	}
-
-	public Integer getStatut() {
-		return statut;
-	}
-
-	public void setStatut(Integer statut) {
-		this.statut = statut;
-	}
-
-	public Date getDatesaisie() {
-		return datesaisie;
-	}
-
-	public void setDatesaisie(Date datesaisie) {
-		this.datesaisie = datesaisie;
-	}
-
-	public long getIdutilisateur() {
-		return idutilisateur;
-	}
-
-	public void setIdutilisateur(long idutilisateur) {
-		this.idutilisateur = idutilisateur;
-	}
 	
 	
 }

@@ -13,7 +13,7 @@ import com.Atos.Webaccess.sib.cpa.cheque.ChequeCPAService;
 @RestController
 @RequestMapping("/sib/cpa")
 public class CompteCPAController {
-	
+	/*
 	@Autowired
 	CompteCPAService compteCPAService;
 	
@@ -25,7 +25,7 @@ public class CompteCPAController {
 		
 	}
 	
-	
+	*/
 	
 
 }

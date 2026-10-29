@@ -1,3 +1,4 @@
+
 package com.Atos.Webaccess.Domain.Agence;
 
 import com.Atos.Webaccess.Domain.Banque.Banque;
@@ -14,7 +15,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "AGENCES")
+@Table(name = "AGENCES", schema = "dbo")
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -39,16 +40,14 @@ public class Agence implements Serializable {
     @Column(name = "STATUT")
     private Integer statut;
 
-    //@Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DATEMAJ")
     private Date datemaj;
 
-    // This field maps the existing IDBANQUE column.
+    // Writable mapping of IDBANQUE
     @Column(name = "IDBANQUE")
     private Integer id_banque;
 
-    // Read-only association: id_banque remains the writable field,
-    // matching the legacy Hibernate mapping.
+    // Read-only association using the same database column
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(
         name = "IDBANQUE",
@@ -57,7 +56,7 @@ public class Agence implements Serializable {
     )
     private Banque bankAgence;
 
-    // The Groupe entity owns the GROUPE_AGENCES relationship.
-    @ManyToMany(mappedBy = "agences_grp", fetch = FetchType.LAZY)
+    // Groupe owns the many-to-many relationship
+    @ManyToMany(mappedBy = "agencesGrp", fetch = FetchType.LAZY)
     private Set<Groupe> grps_agence = new HashSet<>();
 }
