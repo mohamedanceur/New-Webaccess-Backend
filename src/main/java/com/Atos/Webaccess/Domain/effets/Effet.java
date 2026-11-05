@@ -1,26 +1,16 @@
 package com.Atos.Webaccess.Domain.effets;
 
 
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Table(name = "EFFETS")
 @Getter
 @Setter
-@NoArgsConstructor
 public class Effet {
 
     @Id
@@ -34,6 +24,7 @@ public class Effet {
     @Column(name = "NUMEROEFFET", length = 10)
     private String numeroeffet;
 
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "DATEECHEANCE")
     private Date dateecheance;
 

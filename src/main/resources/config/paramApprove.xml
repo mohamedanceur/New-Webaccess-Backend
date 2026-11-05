@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<init>
+  <general classe="general">
+	
+	<CodeBanque>038</CodeBanque>
+	<CodeAgence>AgenceDeRegrepement</CodeAgence>
+ 			
+	<PathImagesOperationsBD>E:/ROOT_STC/AGENCE/BASE/Images</PathImagesOperationsBD> 
+	<PathImagesOperations>E:/ROOT_STC/AGENCE/BASE/Images</PathImagesOperations>
+ 	
+	<ExistConnexSIB>0</ExistConnexSIB>
+	<!--  <NomSIB>CPA</NomSIB>
+    <urlConnectionSIB>jdbc:informix-sqli://172.16.50.40:1541/cpa99000:INFORMIXSERVER=cpaprodt</urlConnectionSIB>
+    <usernameSIB>tcomp</usernameSIB>
+    <passwordSIB>tcomp#cpa</passwordSIB> 
+    -->
+  <!--  <NomSIB>HSBC</NomSIB>
+    <urlConnectionSIB>jdbc:oracle:thin:@localhost:monecheck</urlConnectionSIB>
+    <usernameSIB>monecheck</usernameSIB>
+    <passwordSIB>monecheck</passwordSIB> 
+    <pathsignature>/</pathsignature>
+    <pathphoto>/</pathphoto> -->
+    
+    
+    <NomSIB>AGB</NomSIB>
+    <urlConnectionSIB>jdbc:sqlserver://localhost:1433;databaseName=monecheck</urlConnectionSIB>
+    <usernameSIB>sa</usernameSIB>
+    <passwordSIB>Admin123</passwordSIB> 
+    <pathphoto>/</pathphoto>
+ 	<pathsignature>/</pathsignature>
+ 	<deepCheck>1</deepCheck>
+ 	<typechequeAD>AD</typechequeAD>
+    <typechequeCB>CB</typechequeCB>
+ 	
+    
+    <Docubase>0</Docubase> 
+    <docubase_USER>docuUser</docubase_USER>
+    <docubase_PASSWORD>docuPwd</docubase_PASSWORD>
+    <docubase_IPSERVER>192.168.0.105</docubase_IPSERVER>
+    
+    <typeImage>BLOB</typeImage>
+    <urlConnectionSIBSignature>jdbc:sqlserver://localhost:1433;databaseName=sib</urlConnectionSIBSignature>
+    <usernameSIBSignature>monecheck</usernameSIBSignature>
+    <passwordSIBSignature>monecheck</passwordSIBSignature> 
+     
+  </general>
+  
+</init>
