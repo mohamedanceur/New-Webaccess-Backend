@@ -1,13 +1,15 @@
 package com.Atos.Webaccess.Domain.Operations;
 
-import com.Atos.Webaccess.Domain.Operations.Operation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface OperationRepository extends JpaRepository<Operation, Integer> {
+public interface OperationRepository extends
+        JpaRepository<Operation, Integer>,
+        JpaSpecificationExecutor<Operation> {
 
     Optional<Operation> findByReferenceinterne(String referenceinterne);
 }

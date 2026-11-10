@@ -1,7 +1,6 @@
 package com.Atos.Webaccess.Domain.Carte;
 
 
-import com.Atos.Webaccess.Domain.Banque.Banque;
 import com.Atos.Webaccess.Domain.Evenement.EvenementService;
 import com.Atos.Webaccess.Domain.Operations.Operation;
 import com.Atos.Webaccess.Domain.Carte.DTO.CarteRequest;
@@ -9,7 +8,10 @@ import com.Atos.Webaccess.Domain.Carte.DTO.CarteResponse;
 import com.Atos.Webaccess.Domain.Operations.OperationRepository;
 import com.Atos.Webaccess.Domain.Carte.opCarteEnAttente.OpCarteEnAttente;
 import com.Atos.Webaccess.Domain.Carte.opCarteEnAttente.OpCarteEnAttenteRepository;
-
+import com.Atos.Webaccess.Domain.Libelle.Libelle;
+import com.Atos.Webaccess.Domain.Libelle.LibelleRepository;
+import java.util.Map;
+import java.util.stream.Collectors;
 import com.Atos.Webaccess.User.Entities.User;
 
 import jakarta.persistence.EntityManager;
@@ -39,7 +41,7 @@ public class CarteServiceImpl implements CarteService {
     private final OpCarteEnAttenteRepository pendingRepository;
     private final OperationRepository operationRepository;
     private final EvenementService evenementService;
-
+    private final LibelleRepository libelleRepository;
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -74,38 +76,70 @@ public class CarteServiceImpl implements CarteService {
     // 1. LIST PENDING CARD OPERATIONS
     // =========================================================
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<CarteResponse> getPendingOperations() {
 
-        List<Object[]> rows = pendingRepository.findPendingCardOperations(
-                "%" + carteRetrait + "%",
-                "%" + cartePaiement + "%"
-        );
+	@Override
+	@Transactional(readOnly = true)
+	public List<CarteResponse> getPendingOperations() {
+	
+	    Map<String, Map<String, String>> labels = loadCarteLabels();
+	
+	    Map<String, String> origins =
+	            labels.getOrDefault("ORIGINE", Map.of());
+	
+	    Map<String, String> operationTypes =
+	            labels.getOrDefault("CODEOPERATION", Map.of());
+	
+	    Map<String, String> states =
+	            labels.getOrDefault("ETAT", Map.of());
+	
+	    List<Object[]> rows = pendingRepository.findPendingCardOperations(
+	    		"_" + carteRetrait + "_",
+	    		"_" + cartePaiement + "_"
+	    );
+	
+	    return rows.stream().map(row -> {
+	
+	        CarteResponse response = new CarteResponse();
+	
+	        response.setIdoperation((Integer) row[0]);
+	        response.setNumerocarte((String) row[1]);
+	        response.setBanquetire((String) row[2]);
+	        response.setMontantoperation(toDecimal((Number) row[3]));
+	
+	        response.setOrigine((Integer) row[4]);
+	        response.setRio((String) row[5]);
+	        response.setReferenceinterne((String) row[6]);
+	        response.setTypeoperation((String) row[7]);
+	        response.setEtat((Integer) row[8]);
+	        response.setIdopcarte((Integer) row[9]);
+	
+	        // Resolve legacy labels, preserving the original code as fallback.
+	        response.setLibelleorigine(
+	                origins.getOrDefault(
+	                        String.valueOf(response.getOrigine()),
+	                        String.valueOf(response.getOrigine())
+	                )
+	        );
+	
+	        response.setLibelletypeoperation(
+	                operationTypes.getOrDefault(
+	                        response.getTypeoperation(),
+	                        response.getTypeoperation()
+	                )
+	        );
+	
+	        response.setLibelleetat(
+	                states.getOrDefault(
+	                        String.valueOf(response.getEtat()),
+	                        String.valueOf(response.getEtat())
+	                )
+	        );
+	
+	        return response;
+	
+	    }).toList();
+	}
 
-        return rows.stream().map(row -> {
-
-            CarteResponse response = new CarteResponse();
-
-            response.setIdoperation((Integer) row[0]);
-            response.setNumerocarte((String) row[1]);
-            response.setBanquetire((String) row[2]);
-
-            response.setMontantoperation(
-                    toDecimal((Number) row[3])
-            );
-
-            response.setOrigine((Integer) row[4]);
-            response.setRio((String) row[5]);
-            response.setReferenceinterne((String) row[6]);
-            response.setTypeoperation((String) row[7]);
-            response.setEtat((Integer) row[8]);
-            response.setIdopcarte((Integer) row[9]);
-
-            return response;
-
-        }).toList();
-    }
 
 
     // =========================================================
@@ -364,6 +398,42 @@ public class CarteServiceImpl implements CarteService {
         );
 
         return buildResponse(savedPending, savedCarte);
+    }
+    
+    @Override
+    public CarteResponse addCarteRefundTPE(
+            CarteRequest request,
+            User user,
+            String name,
+            String host,
+            String currency) {
+
+        request.setTypeoperation(operationRemboursementTPE);
+
+        return addCarteTPE(
+                request,
+                user,
+                name,
+                host,
+                currency
+        );
+    }
+    
+    @Override
+    public CarteResponse modifyCarteRefundTPE(
+            Integer idOperation,
+            CarteRequest request,
+            User user,
+            String currency) {
+
+        request.setTypeoperation(operationRemboursementTPE);
+
+        return modifyCarteTPE(
+                idOperation,
+                request,
+                user,
+                currency
+        );
     }
 
 
@@ -1207,5 +1277,23 @@ public class CarteServiceImpl implements CarteService {
                     e
             );
         }
+        
+        
+    }
+    
+    private Map<String, Map<String, String>> loadCarteLabels() {
+
+        return libelleRepository.findByTypeIn(
+                List.of("ORIGINE", "CODEOPERATION", "ETAT")
+        ).stream()
+         .filter(label -> label.getCode() != null)
+         .collect(Collectors.groupingBy(
+             Libelle::getType,
+             Collectors.toMap(
+                 Libelle::getCode,
+                 Libelle::getLibelle1,
+                 (first, second) -> first
+             )
+         ));
     }
 }

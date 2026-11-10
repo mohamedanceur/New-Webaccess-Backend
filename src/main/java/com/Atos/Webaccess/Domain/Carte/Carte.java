@@ -88,7 +88,7 @@ public class Carte {
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "DONNEESEMV", length = 8)
     private String donneesemv;
-
+       
     @JdbcTypeCode(SqlTypes.CHAR)
     @Column(name = "DATEREMISE", length = 8)
     private String dateremise;
