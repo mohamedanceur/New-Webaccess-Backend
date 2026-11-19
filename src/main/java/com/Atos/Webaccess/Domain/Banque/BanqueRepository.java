@@ -38,4 +38,6 @@ public interface BanqueRepository extends JpaRepository<Banque, Integer> {
         where b.banqueMere = 1
         """)
     List<Integer> findBanqueMereIds();
+    
+    List<Banque> findByStatutOrderByLibelleAsc(Integer statut);
 }

@@ -36,4 +36,23 @@ public class OperationSearchRequest {
     private String nom_tire;
     private String nom_ben;
     private String motif_rej;
+    
+	 // APPROVE search criteria
+	
+	 // A = Aller, R = Retour
+	 private String sens = "A";
+	
+	 // Operation nature; legacy value 3 uses a different TYPEOPERATION prefix
+	 private String natOpr;
+	
+	 // 1 = Virement, 2 = Prélèvement, 3 = Chèque,
+	 // 4 = Carte, 6 = Effet
+	 private Integer instrument;
+	
+	 // Selected APPROVE task
+	 private Integer idTache;
+	
+	 // Selected task state; blank means the legacy default state -1
+	 private String etatSelectTache = "";
+	 
 }

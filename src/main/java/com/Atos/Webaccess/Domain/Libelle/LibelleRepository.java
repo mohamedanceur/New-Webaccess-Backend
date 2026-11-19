@@ -12,4 +12,11 @@ public interface LibelleRepository
         extends JpaRepository<Libelle, Integer> {
 
     List<Libelle> findByTypeIn(Collection<String> types);
+    
+    List<Libelle> findByTypeOrderByCodeAsc(String type);
+
+    List<Libelle> findByTypeAndLibelle3(
+            String type,
+            String libelle3
+    );
 }
