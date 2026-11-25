@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import com.Atos.Webaccess.User.Entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "TACHES")
@@ -107,5 +108,6 @@ public class Tache implements Serializable {
             columnDefinition = "int"
         )
     )
+    @JsonIgnore
     private Set<User> usersTache = new HashSet<>();
 }

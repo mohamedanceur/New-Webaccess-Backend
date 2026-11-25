@@ -20,4 +20,6 @@ public class ApproveAccessResponse {
     private List<Libelle> accountStates;
 
     private boolean canValidateAllOperations;
+    
+    private boolean canManagePrivileges;
 }

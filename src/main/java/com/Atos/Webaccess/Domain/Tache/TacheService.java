@@ -74,7 +74,6 @@ public class TacheService {
         target.setEtatbascule9(source.getEtatbascule9());
         target.setEtatbascule10(source.getEtatbascule10());
 
-        target.setVersion(source.getVersion());
-        target.setDatemaj(source.getDatemaj());
+       
     }
 }

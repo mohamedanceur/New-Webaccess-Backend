@@ -12,5 +12,5 @@ public class ApproveSearchRequest extends OperationSearchRequest {
      * Beneficiary bank filter.
      * -1 means all banks.
      */
-    private String approveBeneficiaryBank = "-1";
+    private String approveBeneficiaryBank = "004";
 }

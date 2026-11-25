@@ -19,6 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	public boolean existsByUsername(String username);
 
 	public List<User> findByIdGroupe(long idGroupe);
+	
+	List<User> findByIdBanqueAndStatusOrderByUsernameAsc(Long idBanque, int status);
 
 //      nom_utilisateur like :NOM_UTILISATEUR and etatlot != :ETATLOT and etatlot !=0 and etatlot !=5 and etatlot !=3 and etatlot !=7
 	@Query("select u.username from User u where id = :idutilisateur")

@@ -13,6 +13,7 @@ import com.Atos.Webaccess.User.Entities.Right;
 import com.Atos.Webaccess.User.Entities.Role;
 import com.Atos.Webaccess.User.Entities.User;
 import com.Atos.Webaccess.User.Repositories.UserRepository;
+import com.Atos.Webaccess.config.ApplicationParameters;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Tuple;
@@ -54,24 +55,15 @@ public class ApproveSearchService {
     private final AgenceRepository agenceRepository;
     private final OperationTypeCodeProperties operationTypeCodes;
 
-    
+    private final ApplicationParameters applicationParameters;
     public ApproveSearchResponse search(ApproveSearchRequest request) {
         validateRequest(request);
 
         User user = authenticatedUser();
         Set<Long> rights = activeRightIds(user);
+
         
-        System.out.println("========== APPROVE DEBUG ==========");
-        System.out.println("Authenticated user: " + user.getUsername());
-        System.out.println("Loaded rights: " + rights);
-        System.out.println("Has right 96: " + rights.contains(96L));
-        System.out.println("Has right 97: " + rights.contains(97L));
-        System.out.println("Has right 98: " + rights.contains(98L));
-        System.out.println("Has right 99: " + rights.contains(99L));
-        System.out.println("===================================");
-        
-        if (!rights.contains(RIGHT_APPROVE_OPERATIONS)
-                && !rights.contains(RIGHT_APPROVE_TASK_PRIVILEGES)) {
+        if (!rights.contains(RIGHT_APPROVE_OPERATIONS) && !rights.contains(RIGHT_APPROVE_TASK_PRIVILEGES)) {
             throw new AccessDeniedException("APPROVE operation search is not permitted.");
         }
 
@@ -94,11 +86,11 @@ public class ApproveSearchService {
             throw new IllegalStateException("Unable to resolve the authenticated user's bank code.");
         }
 
-        String configuredAgency = user.getDefault_Code_Agence();
+        String configuredAgency = applicationParameters.getCodeAgence();
         if (configuredAgency == null || configuredAgency.isBlank()) {
             configuredAgency = "*";
         }
-
+        
         List<String> groupAgencyCodes = agenceRepository
                 .findAgencesByGroupeId(Math.toIntExact(user.getIdGroupe()))
                 .stream()
@@ -217,8 +209,9 @@ public class ApproveSearchService {
         }
 
         // In the legacy configuration, '*' disables the establishment filter.
-        if (!"*".equals(bankCode)) {
-            predicates.add(cb.equal(op.get("etablissement"), bankCode));
+        String establishment = applicationParameters.getCodeBanque();
+        if (establishment != null && !establishment.isBlank() && !"*".equals(establishment)) {
+            predicates.add(cb.equal(op.get("etablissement"), establishment));
         }
 
         // Both legacy Cheque and Effet searches use DATEREGLEMENT > today 23:59:59.
@@ -369,9 +362,7 @@ public class ApproveSearchService {
     private String effectiveState(ApproveSearchRequest request) {
         String state = request.getEtatSelectTache();
 
-        return state == null || state.isBlank()
-                ? "-1"
-                : state.trim();
+        return state == null || state.isBlank() ? "-1" : state.trim();
     }
 
     private int parseState(String state) {
