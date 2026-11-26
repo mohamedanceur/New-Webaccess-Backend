@@ -1,9 +1,9 @@
 package com.Atos.Webaccess.Approve;
 
+import com.Atos.Webaccess.Approve.access.ApproveAccessResponse;
+import com.Atos.Webaccess.Approve.access.ApproveAccessService;
 import com.Atos.Webaccess.Approve.recherche.ApproveSearchResponse;
 import com.Atos.Webaccess.Approve.recherche.ApproveSearchService;
-import com.Atos.Webaccess.Approve.recherche.response.ApproveAccessResponse;
-import com.Atos.Webaccess.Approve.service.ApproveAccessService;
 import com.Atos.Webaccess.Approve.transition.ApproveTransitionService;
 import com.Atos.Webaccess.Approve.transition.TransitionRequest;
 import com.Atos.Webaccess.Approve.transition.TransitionResult;

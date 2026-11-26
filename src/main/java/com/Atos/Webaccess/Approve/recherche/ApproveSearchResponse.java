@@ -5,8 +5,6 @@ import lombok.Getter;
 
 import java.util.List;
 
-import com.Atos.Webaccess.Approve.ApproveOperationDto;
-
 @Getter
 @Builder
 public class ApproveSearchResponse {

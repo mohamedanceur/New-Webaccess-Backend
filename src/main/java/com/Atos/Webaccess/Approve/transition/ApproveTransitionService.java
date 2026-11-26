@@ -1,6 +1,6 @@
 package com.Atos.Webaccess.Approve.transition;
 
-import com.Atos.Webaccess.Approve.ApproveOperationDto;
+import com.Atos.Webaccess.Approve.recherche.ApproveOperationDto;
 import com.Atos.Webaccess.Approve.recherche.ApproveSearchService;
 import com.Atos.Webaccess.Approve.service.CurrentUserProvider;
 import com.Atos.Webaccess.Domain.Agence.Agence;

@@ -1,6 +1,5 @@
 package com.Atos.Webaccess.Approve.recherche;
 
-import com.Atos.Webaccess.Approve.ApproveOperationDto;
 import com.Atos.Webaccess.Domain.Agence.Agence;
 import com.Atos.Webaccess.Domain.Agence.AgenceRepository;
 import com.Atos.Webaccess.Domain.Banque.Banque;

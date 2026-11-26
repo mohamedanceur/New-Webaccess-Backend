@@ -1,6 +1,6 @@
 package com.Atos.Webaccess.Approve.transition;
 
-import com.Atos.Webaccess.Approve.Priv.PrivUserService;
+import com.Atos.Webaccess.Approve.privilege.PrivUserService;
 import com.Atos.Webaccess.Approve.recherche.ApproveSearchService;
 import com.Atos.Webaccess.Domain.Operations.OperationRepository;
 import com.Atos.Webaccess.Domain.Operations.OperationTypeCodeProperties;
